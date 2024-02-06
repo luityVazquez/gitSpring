@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}"></title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+	<body>
+		<div class="container">
+		<h1 th:text="${titulo}"
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"></h1>
+		<form th:action="@{/vistaSocio}" th:object="${socio}" method="post">
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">ID: </label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{id_socio}" class="form-control"
+						th:errorclass="'form-control alert-danger'" /> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('id_socio')}" th:errors="*{id_socio}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Nombre: </label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{nombre}" class="form-control"
+						th:errorclass="'form-control alert-danger'" /> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Apellidos: </label>
+				<div class="col-sm-6">
+					<input type="text" th:field="*{apellidos}" class="form-control"
+						th:errorclass="'form-control alert-danger'" /> <small
+						class="form-text text-danger"
+						th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<input type="submit" value="Registrar" class="btn btn-primary" />
+				</div>
+			</div>
+			<div  class="form-group row">
+				<p th:if="${!#fields.hasErrors('*')}" th:text="${mensajeCreado}"></p>
+			</div>
+			<p th:text="${mensajeYaExiste}"></p>
+		</form>
+	</div>
+	</body>
+</html>

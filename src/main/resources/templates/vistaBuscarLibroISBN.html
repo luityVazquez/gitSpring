@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Título</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+    <p><a th:href="@{/listar}" class="btn btn-success btn-xs">Listado libros</a>
+		<a th:href="@{/buscarLibroModificar}" class="btn btn-success btn-xs">Modificar libro</a>
+	</p>
+		
+		<h1 th:text="${titulo}"></h1>
+
+    <form th:action="@{/comprobarLibro}" th:object="${libro}" method="post" class="mb-4">
+        <div class="form-group">
+            <label for="isbn">ISBN:</label>
+            <input type="text" th:field="*{isbn}" class="form-control"/>
+        </div>
+        <button type="submit" class="btn btn-primary">BUSCAR POR ISBN</button>
+    </form>
+    
+    <p th:text="${mensaje}" class="text-danger"></p>
+
+    <div th:if="${libroFinal != null}">
+		<h1 th:text="${titulo}" class="mb-4"></h1>
+        <table class="table">
+            <tr>
+                <td>ISBN</td>
+                <td th:text="${libroFinal.isbn}"></td>
+            </tr>
+            <tr>
+                <td>Título</td>
+                <td th:text="${libroFinal.titulo}"></td>
+            </tr>
+            <tr>
+                <td>Autor</td>
+                <td th:text="${libroFinal.autor}"></td>
+            </tr>
+            <tr>
+                <td>Prestado</td>
+                <td th:if="${libroFinal.prestado}" class="text-success">SI</td>
+                <td th:if="${!libroFinal.prestado}" class="text-danger">NO</td>
+            </tr>
+            <tr>
+                <td>Socio: </td>
+                <td th:if="${libroFinal.socio == null}">El libro no ha sido prestado</td>
+                <td th:if="${libroFinal.socio != null}" th:text="${libroFinal.socio}"></td>
+            </tr>
+        </table>
+    </div>
+
+    
+</body>
+</html>

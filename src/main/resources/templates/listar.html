@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}"></title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="container">
+		<h1
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+			th:text="${titulo}"></h1>
+		<p><a th:href="@{/buscarLibroModificar}" class="btn btn-success btn-xs">Modificar libro</a>
+			<a th:href="@{/buscarLibro}" class="btn btn-success btn-xs">Buscar libro</a>
+			<a th:href="@{/vistaLibro}" class="btn btn-success btn-xs">Resgistrar libro</a>
+		</p>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ISBN</th>
+					<th>Titulo</th>
+					<th>Autor</th>
+					<th>Prestado</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="libro: ${libros}">
+					<td th:text="${libro.isbn}"></td>
+					<td th:text="${libro.titulo}"></td>
+					<td th:text="${libro.autor}"></td>
+					<td th:if="${libro.prestado}" class="text-success">SI</td>
+					<td th:unless="${libro.prestado}" class="text-danger">NO</td>
+					<!--<td th:if="${!libro.prestado}" class="text-success">SI</td>-->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
